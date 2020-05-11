@@ -6,5 +6,5 @@ while read url; do
     filename=$(echo $url | sha256sum | awk '{print $1}')
     filename="out/$filename"
     echo "$filename $url" | tee -a index
-    curl -sk "$url" -o $filename
+    curl -sk -v "$url" &> $filename
 done
