@@ -2,9 +2,9 @@
 
 #takes input from a file, where the format is a word pr line, and returns only the subdomain that returns OK
 domain=$1
-while read sub; do
-  if host "$sub.$domain" &> /dev/null; then
-    echo "$sub.$domain"
+xargs -P10 -n1 -I{} bash -c "
+  if host \"{}.$domain\" &> /dev/null; then
+    echo \"{}.$domain\"
   fi
-done
+"
 
